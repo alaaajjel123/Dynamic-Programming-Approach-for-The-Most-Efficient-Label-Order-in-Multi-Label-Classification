@@ -12,7 +12,7 @@ Before we get into the nitty-gritty, let's set the stage with some fun and relat
 
 ### 1.1 The Basics: Multi-Label Classification
 
-In traditional multi-label classification, we have an input $$\( x \)$$ and multiple output labels $$\( y_1, y_2, ..., y_n \)$$. The standard approach assumes that these labels are independent. That is, the probability of $$\( y_i \)$$ given $$\( x \)$$ is independent of the other labels $$\( y_j \)$$ (where \( j \neq i \)). Mathematically, this is expressed as:
+In traditional multi-label classification, we have an input $$\( x \)$$ and multiple output labels $$\( y_1, y_2, ..., y_n \)$$. The standard approach assumes that these labels are independent. That is, the probability of $$\( y_i \)$$ given $$\( x \)$$ is independent of the other labels $$\( y_j \)$$ $$(where \( j \neq i \))$$. Mathematically, this is expressed as:
 
 $$
 \[
@@ -23,39 +23,39 @@ $$
 But wait, is this assumption always valid? The real answer is **NO!** In many real-world scenarios, labels may seem independent at first glance, but upon further analysis, we discover powerful dependencies that might not be apparent initially.
 
 For example, consider predicting:
-- \( y_1 \): The price of a house
-- \( y_2 \): Whether the price will be reduced
-- \( y_3 \): Whether it's a good deal
+- $$\( y_1 \)$$: The price of a house
+- $$\( y_2 \)$$: Whether the price will be reduced
+- $$\( y_3 \)$$: Whether it's a good deal
 
 Clearly, these labels are related! The price reduction might depend on the current price, and whether it’s a good deal might depend on both the price and the likelihood of a reduction.
 
 ### 1.2 The Challenge: Hidden Dependencies
 
 The assumption of label independence simplifies the problem, but it can lead to suboptimal performance. Hidden patterns and dependencies between labels are often overlooked. For instance, in the house pricing example:
-- The probability of \( y_2 \) (price reduction) depends on \( y_1 \) (current price).
-- \( y_3 \) (good deal) depends on both \( y_1 \) and \( y_2 \).
+- The probability of $$\( y_2 \)$$ (price reduction) depends on $$\( y_1 \)$$ (current price).
+- $$\( y_3 \)$$ (good deal) depends on both $$\( y_1 \)$$ and $$\( y_2 \)$$.
 
 Ignoring these dependencies can result in poor predictions.
 
 To illustrate this, let’s use probability theory:
-- If two events \( A \) and \( B \) are **independent**, then:
-  \[ P(A \cap B) = P(A) \cdot P(B) \]
+- If two events $$\( A \)$$ and $$\( B \)$$ are **independent**, then:
+  $$\[ P(A \cap B) = P(A) \cdot P(B) \]$$
 - But if they are **dependent**, then:
-  \[ P(A \cap B) = P(A) \cdot P(B | A) \]
+  $$\[ P(A \cap B) = P(A) \cdot P(B | A) \]$$
 
 This small difference can significantly impact accuracy.
 
 ### 1.3 Real-World Example: Medical Diagnosis
 
 Imagine a multi-label classification task where we predict the presence of three diseases based on patient symptoms:
-- \( x \): Set of symptoms
-- \( y_1 \): Whether the patient has Diabetes
-- \( y_2 \): Whether the patient has Hypertension
-- \( y_3 \): Whether the patient has Chronic Kidney Disease (CKD)
+- $$\( x \)$$: Set of symptoms
+- $$\( y_1 \)$$: Whether the patient has Diabetes
+- $$\( y_2 \)$$: Whether the patient has Hypertension
+- $$\( y_3 \)$$: Whether the patient has Chronic Kidney Disease (CKD)
 
 At first glance, these labels might seem independent. However, after training a model on patient data, we might discover strong dependencies:
-- **Hidden Direct Dependency**: Diabetes (\( y_1 \)) is a major risk factor for CKD (\( y_3 \)).
-- **Hidden Reverse Dependency**: Hypertension (\( y_2 \)) can be both a cause and a consequence of CKD (\( y_3 \)).
+- **Hidden Direct Dependency**: Diabetes $$(\( y_1 \))$$ is a major risk factor for CKD $$(\( y_3 \))$$.
+- **Hidden Reverse Dependency**: Hypertension ($$\( y_2 \)$$) can be both a cause and a consequence of CKD ($$\( y_3 \)$$).
 - **Multi-Label Interaction**: If a patient has both diabetes and hypertension, their risk of CKD skyrockets.
 
 These insights demonstrate why considering label dependencies is crucial in multi-label classification.
@@ -66,7 +66,7 @@ These insights demonstrate why considering label dependencies is crucial in mult
 
 ### 2.1 The Coin Toss Example: "Heads" or "Tails"
 
-Let’s take a step back and look at a simple example: the classic coin toss game. It seems straightforward—flip a fair coin, and it lands on either heads or tails with a probability of \( 1/2 \) each. Right? Well, not so fast! 🛑
+Let’s take a step back and look at a simple example: the classic coin toss game. It seems straightforward—flip a fair coin, and it lands on either heads or tails with a probability of $$\( 1/2 \)$$ each. Right? Well, not so fast! 🛑
 
 ### 2.2 The Simplistic Model
 
@@ -76,7 +76,7 @@ Typical assumptions in modeling a coin toss:
 - External factors (air resistance, magnetic fields, etc.) are ignored.
 - The toss occurs in isolation, unaffected by anything else in the universe.
 
-With these assumptions, we conclude \( P(\text{Heads}) = 1/2 \) and \( P(\text{Tails}) = 1/2 \). Simple and clean. But is this model realistic? 🤔
+With these assumptions, we conclude $$\( P(\text{Heads}) = 1/2 \) and \( P(\text{Tails}) = 1/2 \)$$. Simple and clean. But is this model realistic? 🤔
 
 ### 2.3 The Hidden Dependencies
 
@@ -139,16 +139,15 @@ For the coin toss, we opt for feasibility by ignoring infinitesimal dependencies
 
 By adopting this simplified model, we make the following assumption:
 
-\[
+$$\[
 p(\text{pile}) = p(\text{pile} | \int_{\text{Mentioned Influences}} f(\text{Influence}) d(\text{Influence})) = p(\text{pile} \cap \int_{\text{Mentioned Influences}} f(\text{Influence}) d(\text{Influence}))
-\]
+\]$$
 
-\[
+$$\[
 = p(\text{pile} | (\int_{\text{Mentioned Influences}} f(\text{Influence}) d(\text{Influence}) + \int_{\text{Unmentioned Influences}} f(\text{Influence}) d(\text{Influence})))
-\]
+\]$$
 
-Since we assume \(
- p(\int_{\text{Unmentioned Influences}} f(\text{Influence}) d(\text{Influence})) \approx 0 \),
+Since we assume $$\(p(\int_{\text{Unmentioned Influences}} f(\text{Influence}) d(\text{Influence})) \approx 0 \)$$,
  this assumption holds. The validity of this assumption is a separate question, but it forms the foundation of practical probability modeling.
 
 ### 3.3. The Hidden Complexity of AI Systems
@@ -167,9 +166,9 @@ What if the future could influence the present?
 
 While this seems like science fiction, quantum mechanics suggests the possibility of non-local correlations where future events might impact current outcomes. If true, our integral of dependencies would not only encompass past and present influences but also future ones:
 
-\[
+$$\[
 P(Pile | Universe) = \int_{\text{Past, Present, Future Influences}} f(\text{Influence}) d(\text{Influence})
-\]
+\]$$
 
 This would further complicate an already intractable problem but also push the boundaries of our understanding.
 
@@ -207,7 +206,7 @@ Even the smallest, seemingly insignificant factors can have profound impacts on 
 
 Consider this: Could a dog that died 7000 years ago really influence the outcome of a coin toss today? Probably not in a practical sense. But the idea highlights a fundamental truth about the universe—**everything is interconnected**. From the tiniest quantum fluctuation to the largest cosmic event, every action has a reaction, and every event has a consequence.
 
-So, next time you toss a coin, take a moment to consider all the hidden dependencies that could be at play. The universe is far more complex than it appears. 😄
+So, next time you toss a coin, take a moment to consider all the hidden dependencies that could be at play. The universe is far more complex than it appears. 
 
 
 ## 5. The Football Game Prediction Example
@@ -268,7 +267,7 @@ When everyone follows the same trading signals:
 
 This phenomenon is known as **market reflexivity**—a situation where the predictions of the system influence the market, which in turn affects the accuracy of the predictions.
 
-The success of the system leads to its own downfall. As traders act on the same insights, the market itself changes, making the system’s predictions less accurate. The result? A self-fulfilling prophecy gone wrong. 😬
+The success of the system leads to its own downfall. As traders act on the same insights, the market itself changes, making the system’s predictions less accurate. The result? A self-fulfilling prophecy gone wrong. 
 
 To illustrate the concept of market reflexivity, consider this analogy:
 
@@ -327,17 +326,17 @@ This paradox of interdependencies shows that while collaborative decision-making
 
 To understand this better, let’s express the decision-making process mathematically. Suppose the profit of each trader depends on their decision and the decisions of others:
 
-\[ \text{Profit}_i = f(\text{Decision}_i, \text{Decision}_j, \text{Decision}_k) \]
+$$\[ \text{Profit}_i = f(\text{Decision}_i, \text{Decision}_j, \text{Decision}_k) \]$$
 
 Where:
-- \( \text{Decision}_i \) is the decision of Trader \( i \).
-- \( \text{Decision}_j \) and \( \text{Decision}_k \) are the decisions of other traders.
+- $$\( \text{Decision}_i \) is the decision of Trader \( i \)$$.
+- $$\( \text{Decision}_j \) and \( \text{Decision}_k \)$$ are the decisions of other traders.
 
 In an ordered decision-making process:
 
-\[ \text{Profit}_A = f(\text{Decision}_A) \]
-\[ \text{Profit}_B = f(\text{Decision}_B, \text{Decision}_A) \]
-\[ \text{Profit}_C = f(\text{Decision}_C, \text{Decision}_A, \text{Decision}_B) \]
+$$\[ \text{Profit}_A = f(\text{Decision}_A) \]$$
+$$\[ \text{Profit}_B = f(\text{Decision}_B, \text{Decision}_A) \]$$
+$$\[ \text{Profit}_C = f(\text{Decision}_C, \text{Decision}_A, \text{Decision}_B) \]$$
 
 Here, Trader A’s profit depends solely on their own decision, while Trader B and Trader C's profits are influenced by previous decisions, creating asymmetry.
 
@@ -427,94 +426,94 @@ This approach allows us to train models in a reasonable time frame while still *
 
 ## 9. Dynamic Programming Algorithm for Optimal Label Ordering
 
-Now we will explore the Dynamic Programming (DP) algorithm for determining the optimal order in which to predict a set of labels \(L_1, L_2, ..., L_q\). The goal is to minimize a predefined cost function based on the reciprocal squared margins of each label.
+Now we will explore the Dynamic Programming (DP) algorithm for determining the optimal order in which to predict a set of labels $$\(L_1, L_2, ..., L_q\)$$. The goal is to minimize a predefined cost function based on the reciprocal squared margins of each label.
 
 ### Problem Definition
 
-Given a set of labels \(L_1, L_2, ..., L_q\), our objective is to find the optimal sequence that minimizes the total cost:
+Given a set of labels $$\(L_1, L_2, ..., L_q\)$$, our objective is to find the optimal sequence that minimizes the total cost:
 
-\[
+$$\[
 \text{Cost} = \sum_{i=1}^{q} \frac{1}{(\text{Margin}_i)^2}
-\]
+\]$$
 
-where \(\text{Margin}_i\) represents the margin of label \(L_i\), which quantifies the model's confidence in distinguishing the label.
+where $$\(\text{Margin}_i\)$$ represents the margin of label $$\(L_i\)$$, which quantifies the model's confidence in distinguishing the label.
 
 We use a Dynamic Programming (DP) approach to systematically compute the optimal ordering by leveraging previously computed results.
 
 ### DP Table Definition
 
-- \(V(i, k)\): Minimum cost for a subset of labels of size \(k\), where the last label in the subset is \(L_i\).
-- \(M(i, k)\): Ordered set of labels corresponding to \(V(i, k)\).
+- $$\(V(i, k)\)$$: Minimum cost for a subset of labels of size $$\(k\)$$, where the last label in the subset is $$\(L_i\)$$.
+- $$\(M(i, k)\)$$: Ordered set of labels corresponding to $$\(V(i, k)\)$$.
 
-The goal is to compute \(V(i, q)\) for all \(i\) and determine the minimum value among them to obtain the optimal order.
+The goal is to compute $$\(V(i, q)\)$$ for all $$\(i\)$$ and determine the minimum value among them to obtain the optimal order.
 
 ### Recurrence Relation
 
 The DP transition equation is given by:
 
-\[
+$$\[
 V(i, k+1) = \min_{j \neq i, L_i \notin M(j, k)} \left\{ \frac{1}{(\text{Margin}_i)^2} + V(j, k) \right\}
-\]
+\]$$
 
 where:
-- \(V(i, k+1)\) is the minimum cost for a subset of size \(k+1\) ending with \(L_i\).
-- \(j \neq i\) ensures that the same label is not repeated.
-- \(L_i \notin M(j, k)\) ensures that \(L_i\) is not already in the subset.
-- \(\frac{1}{(\text{Margin}_i)^2}\) accounts for the cost of adding \(L_i\).
-- \(V(j, k)\) represents the minimum cost for a subset of size \(k\) ending with \(L_j\).
+- $$\(V(i, k+1)\)$$ is the minimum cost for a subset of size $$\(k+1\)$$ ending with $$\(L_i\)$$.
+- $$\(j \neq i\)$$ ensures that the same label is not repeated.
+- $$\(L_i \notin M(j, k)\)$$ ensures that $$\(L_i\)$$ is not already in the subset.
+- $$\(\frac{1}{(\text{Margin}_i)^2}\)$$ accounts for the cost of adding $$\(L_i\)$$.
+- $$\(V(j, k)\)$$ represents the minimum cost for a subset of size $$\(k\)$$ ending with $$\(L_j\)$$.
 
 ### Initialization (Base Case)
 
-For subsets of size \(k = 1\):
+For subsets of size $$\(k = 1\)$$:
 
-\[
+$$\[
 V(i,1) = \frac{1}{(\text{Margin}_i)^2}
 \]
 
 \[
 M(i,1) = \{L_i\}
-\]
+\]$$
 
 Since there is only one label in the subset, its cost is simply its own cost.
 
 ### DP Table Computation Steps
 
-1. **Initialize DP Table for \(k = 1\)**
-   - Compute \(V(i,1)\) and \(M(i,1)\) for all labels using the base case formula.
+1. **Initialize DP Table for $$\(k = 1\)$$**
+   - Compute $$\(V(i,1)\)$$ and $$\(M(i,1)\)$$ for all labels using the base case formula.
 
-2. **Iterate Over Subset Sizes \(k = 2\) to \(q\)**
-   - For each subset size \(k\), compute \(V(i, k)\) for all labels \(L_i\).
+2. **Iterate Over Subset Sizes $$\(k = 2\)$$ to $$\(q\)$$**
+   - For each subset size $$\(k\)$$, compute $$\(V(i, k)\)$$ for all labels $$\(L_i\)$$.
 
-3. **Compute \(V(i, k)\) for Each Label \(L_i\)**
-   - Consider all possible labels \(L_j\) that can precede \(L_i\) in the subset.
-   - Compute the cost of adding \(L_i\) to \(M(j, k-1)\).
+3. **Compute $$\(V(i, k)\)$$ for Each Label $$\(L_i\)$$**
+   - Consider all possible labels $$\(L_j\)$$ that can precede $$\(L_i\)$$ in the subset.
+   - Compute the cost of adding $$\(L_i\)$$ to $$\(M(j, k-1)\)$$.
    - Select the option that minimizes the cost.
 
 4. **Update the DP Table**
-   - Store computed \(V(i, k)\) values for future reference.
+   - Store computed $$\(V(i, k)\)$$ values for future reference.
 
 ### Finding the Optimal Label Order
 
-After computing \(V(i, q)\) for all labels, determine the optimal ordering by selecting:
+After computing $$\(V(i, q)\)$$ for all labels, determine the optimal ordering by selecting:
 
-\[
+$$\[
 \text{Optimal Cost} = \min_{i} V(i, q)
-\]
+\]$$
 
-The corresponding \(M(i, q)\) provides the best label order.
+The corresponding $$\(M(i, q)\)$$ provides the best label order.
 
 ### Complexity Analysis
 
 The time complexity of this DP algorithm is:
 
-\[O(q^3 \cdot n \cdot d)\]
+$$\[O(q^3 \cdot n \cdot d)\]$$
 
 where:
-- \(q\) is the number of labels.
-- \(n\) is the number of training examples.
-- \(d\) is the dimensionality of the feature space.
+- $$\(q\)$$ is the number of labels.
+- $$\(n\)$$ is the number of training examples.
+- $$\(d\)$$ is the dimensionality of the feature space.
 
-This approach is significantly more efficient than the brute-force \(O(q!)\) solution.
+This approach is significantly more efficient than the brute-force $$\(O(q!)\)$$ solution.
 
 
 
