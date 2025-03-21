@@ -14,11 +14,11 @@ Before we get into the nitty-gritty, let's set the stage with some fun and relat
 
 In traditional multi-label classification, we have an input $$\( x \)$$ and multiple output labels $$\( y_1, y_2, ..., y_n \)$$. The standard approach assumes that these labels are independent. That is, the probability of $$\( y_i \)$$ given $$\( x \)$$ is independent of the other labels $$\( y_j \)$$ (where \( j \neq i \)). Mathematically, this is expressed as:
 
-$$
+$
 \[
 P(y_1, y_2, ..., y_n | x) = \prod_{i=1}^{n} P(y_i | x)
 \]
-$$
+$
 
 But wait, is this assumption always valid? The real answer is **NO!** In many real-world scenarios, labels may seem independent at first glance, but upon further analysis, we discover powerful dependencies that might not be apparent initially.
 
