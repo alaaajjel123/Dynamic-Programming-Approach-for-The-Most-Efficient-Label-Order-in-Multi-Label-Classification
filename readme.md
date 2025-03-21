@@ -116,12 +116,12 @@ Imagine trying to model a coin toss while considering **every factor**—from th
 ### 3.1. The Infinite Integral of Dependencies
 
 To model a process perfectly, we would need to account for all possible influences on its outcome. Mathematically, this can be represented as:
-
+$$
 \[
 P(Pile | Universe) = \int_{\text{All Influences}} f(\text{Influence}) d(\text{Influence})
-\]
+\]$$
 
-Here, \( f(\text{Influence}) \) represents the impact function of each influence on the outcome of the coin toss. This integral attempts to sum up all these influences, from the gravitational pull of distant stars to the emotional state of the person tossing the coin.
+Here, $$\( f(\text{Influence}) \)$$ represents the impact function of each influence on the outcome of the coin toss. This integral attempts to sum up all these influences, from the gravitational pull of distant stars to the emotional state of the person tossing the coin.
 
 However, computing this integral is practically impossible due to several reasons:
 - The number of influences is infinite.
@@ -329,8 +329,8 @@ To understand this better, let’s express the decision-making process mathemati
 $$\[ \text{Profit}_i = f(\text{Decision}_i, \text{Decision}_j, \text{Decision}_k) \]$$
 
 Where:
-- $$\( \text{Decision}_i \) is the decision of Trader \( i \)$$.
-- $$\( \text{Decision}_j \) and \( \text{Decision}_k \)$$ are the decisions of other traders.
+- $$\( \text{Decision}_i \)$$ is the decision of Trader $$\( i \)$$.
+- $$\( \text{Decision}_j \)$$ and $$\( \text{Decision}_k \)$$ are the decisions of other traders.
 
 In an ordered decision-making process:
 
@@ -451,9 +451,9 @@ The goal is to compute $$\(V(i, q)\)$$ for all $$\(i\)$$ and determine the minim
 
 The DP transition equation is given by:
 
-$$\[
-V(i, k+1) = \min_{j \neq i, L_i \notin M(j, k)} \left\{ \frac{1}{(\text{Margin}_i)^2} + V(j, k) \right\}
-\]$$
+$$
+V(i, k+1) = \min_{j \neq i, L_i \notin M(j, k)} \left( \frac{1}{(\text{Margin}_i)^2} + V(j, k) \right)
+$$
 
 where:
 - $$\(V(i, k+1)\)$$ is the minimum cost for a subset of size $$\(k+1\)$$ ending with $$\(L_i\)$$.
@@ -468,9 +468,9 @@ For subsets of size $$\(k = 1\)$$:
 
 $$\[
 V(i,1) = \frac{1}{(\text{Margin}_i)^2}
-\]
+\]$$
 
-\[
+$$\[
 M(i,1) = \{L_i\}
 \]$$
 
